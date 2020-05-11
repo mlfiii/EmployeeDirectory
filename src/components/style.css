@@ -1,0 +1,22 @@
+tr {
+  border: 1px solid black;
+}
+
+th{
+  padding: 5px;
+}
+
+table{
+
+  margin: 20px;  
+}
+.search-imput{
+
+  width: 400px;
+  margin: 10px;
+}
+
+.navbar{
+ 
+  font-size: 2rem;
+}

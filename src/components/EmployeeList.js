@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import "./style.css";
 
 export default class EmployeeList extends React.Component {
 
@@ -46,12 +47,14 @@ export default class EmployeeList extends React.Component {
         return (
 
             <div>
+                <nav className="navbar navbar-light bg-light">
 
-                <input type="text" className="form-control"
-                    value={this.state.search}
-                    onChange={this.updateSearch.bind(this)}
-                />
-                <br />
+                    <input type="text" className="search-imput"
+                        value={this.state.search}
+                        onChange={this.updateSearch.bind(this)}
+                        placeholder="Search Employee Directory"
+                    />
+                </nav>
                 <table className="table-responsive">
                     <thead className="thead-dark">
                         <tr id="state">
@@ -59,7 +62,7 @@ export default class EmployeeList extends React.Component {
                             </th>
                             <th className="th-sm">Name
                             </th>
-                            <th className="th-sm">email
+                            <th className="th-sm">Email
                             </th>
                             <th className="th-sm">Phone
                             </th>
