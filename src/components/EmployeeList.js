@@ -8,32 +8,40 @@ export default class EmployeeList extends React.Component {
     state = {
         employees: [],
         search: "",
-        sortOrder: "asc",
-
-
-        email: 'asc',
-        phone: 'asc',
-        cell: 'asc',
-        name: 'asc'
+        sortField: [],
+        sortOrder: "asc"
 
     }
 
 
     sortBy(key, prop) {
-        // console.log(this.state.employees)
 
+        // console.log('sortField:', this.state.sortField, 'key:', [key])
         let sortOrder = this.state.sortOrder
+        // let sortField = this.state.sortField
+
+        // this.setState({ sortField: sortField })
+        // // console.log(this.state.sortField)
+        // // console.log('sortfield:', this.state.sortField, 'sortOrder', sortOrder)
+        // console.log('sortfield_before:', sortField, 'sortOrder_before', sortOrder)
+        // if (this.state.sortField === "") {
+        //     sortOrder = 'asc'
+        //     console.log('gothere')
+        // }
+
+        // if (this.state.sortField !== [key]) {
+        //     sortOrder = 'asc'
+        //     console.log('gothere2')
+        // }
+        // else if (this.state.sortField === [key]) { sortOrder = this.state.sortOrder }
+
         // console.log("sort:", this.state.[key])
+
+        // console.log('sortfield_after:', sortField, 'sortOrder_after', sortOrder)
+
 
         this.setState({
             employees: this.state.employees.sort(function (a, b) {
-
-                // console.log('a:', a[key])
-                // console.log('prop:', [prop])
-                // console.log('keyprop:', a[key][prop])
-
-
-
                 var nameA = a[key]; // ignore upper and lowercase
                 var nameB = b[key];
                 if (prop === 'first') {
@@ -82,9 +90,13 @@ export default class EmployeeList extends React.Component {
         if (this.state.sortOrder === 'asc') {
 
             this.setState({ sortOrder: 'desc' })
+            // this.setState({ sortField: [key] })
+            // console.log('gothere4')
 
         } else {
             this.setState({ sortOrder: 'asc' })
+            // this.setState({ sortField: [key] })
+            // console.log('gothere5')
 
         }
         // if (sortOrder === 'asc') {
@@ -196,7 +208,7 @@ export default class EmployeeList extends React.Component {
                     <tbody id="data">
 
                         {filteredEmployees.map(employee =>
-                            <tr key={employee.email} >
+                            <tr key={employee.email + employee.phone} >
                                 <td><img src={employee.picture.thumbnail} alt="Smiley face" /></td>
                                 <td id="first_name_column" className="data-column">{employee.name.first}</td>
                                 <td className="data-column">{employee.name.last}</td>
