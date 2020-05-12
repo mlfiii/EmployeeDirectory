@@ -87,7 +87,13 @@ export default class EmployeeList extends React.Component {
             this.setState({ sortOrder: 'asc' })
 
         }
+        // if (sortOrder === 'asc') {
 
+        //     this.setState({ sortOrder: 'desc' })
+        // } else {
+        //     this.setState({ sortOrder: 'asc' })
+
+        // }
     }
     componentDidMount() {
 
@@ -167,7 +173,7 @@ export default class EmployeeList extends React.Component {
                 </nav>
                 <table className="table-responsive">
                     <thead className="thead-dark">
-                        <tr id="state">
+                        <tr key='300'>
                             <th className="th-sm">
                             </th>
                             <th className="th-sm">
@@ -190,7 +196,7 @@ export default class EmployeeList extends React.Component {
                     <tbody id="data">
 
                         {filteredEmployees.map(employee =>
-                            <tr>
+                            <tr key={employee.email} >
                                 <td><img src={employee.picture.thumbnail} alt="Smiley face" /></td>
                                 <td id="first_name_column" className="data-column">{employee.name.first}</td>
                                 <td className="data-column">{employee.name.last}</td>
@@ -208,7 +214,7 @@ export default class EmployeeList extends React.Component {
 
 
 
-            </div>
+            </div >
         )
     }
 
