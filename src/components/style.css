@@ -6,6 +6,11 @@ th{
   padding: 5px;
 }
 
+.data-column{
+  padding-left: 25px;
+  padding-right:20px;
+}
+
 table{
 
   margin: 20px;  

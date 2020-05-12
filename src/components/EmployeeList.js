@@ -7,37 +7,86 @@ export default class EmployeeList extends React.Component {
 
     state = {
         employees: [],
-        search: ""
+        search: "",
+        sortOrder: "asc",
+
+
+        email: 'asc',
+        phone: 'asc',
+        cell: 'asc',
+        name: 'asc'
+
     }
 
 
-    sortBy(key) {
+    sortBy(key, prop) {
+        // console.log(this.state.employees)
+
+        let sortOrder = this.state.sortOrder
+        // console.log("sort:", this.state.[key])
 
         this.setState({
             employees: this.state.employees.sort(function (a, b) {
+
+                // console.log('a:', a[key])
+                // console.log('prop:', [prop])
+                // console.log('keyprop:', a[key][prop])
+
+
+
                 var nameA = a[key]; // ignore upper and lowercase
                 var nameB = b[key];
-                if (key === 'first') {
-                    nameA = a.name.first; // ignore upper and lowercase
-                    nameB = b.name.first; // ignore upper and lowercase
+                if (prop === 'first') {
+                    nameA = a[key][prop]; // ignore upper and lowercase
+                    nameB = b[key][prop]; // ignore upper and lowercase
                 }
 
-
-                if (nameA < nameB) {
-
-                    return -1;
-
+                if (prop === 'last') {
+                    nameA = a[key][prop]; // ignore upper and lowercase
+                    nameB = b[key][prop]; // ignore upper and lowercase
                 }
-                if (nameA > nameB) {
+                if (sortOrder === 'asc') {
 
-                    return 1;
+                    if (nameA < nameB) {
+
+                        return -1;
+
+                    }
+                    if (nameA > nameB) {
+
+                        return 1;
+                    }
+                } else {
+                    if (nameB < nameA) {
+
+                        return -1;
+
+                    }
+                    if (nameB > nameA) {
+
+                        return 1;
+                    }
                 }
+
                 // names must be equal
 
                 return 0;
             })
 
-        })
+        }
+
+        )
+
+
+
+        if (this.state.sortOrder === 'asc') {
+
+            this.setState({ sortOrder: 'desc' })
+
+        } else {
+            this.setState({ sortOrder: 'asc' })
+
+        }
 
     }
     componentDidMount() {
@@ -122,7 +171,10 @@ export default class EmployeeList extends React.Component {
                             <th className="th-sm">
                             </th>
                             <th className="th-sm">
-                                <button className="btn btn-link" onClick={() => this.sortBy('first')}>Name</button>
+                                <button className="btn btn-link" onClick={() => this.sortBy('name', 'first')}>First Name</button>
+                            </th>
+                            <th className="th-sm">
+                                <button className="btn btn-link" onClick={() => this.sortBy('name', 'last')}>Last Name</button>
                             </th>
                             <th className="th-sm">
                                 <button className="btn btn-link" onClick={() => this.sortBy('email')}>Email</button>
@@ -139,11 +191,12 @@ export default class EmployeeList extends React.Component {
 
                         {filteredEmployees.map(employee =>
                             <tr>
-                                <th><img src={employee.picture.thumbnail} alt="Smiley face" /></th>
-                                <th>{employee.name.first} {employee.name.last}</th>
-                                <th>{employee.email}</th>
-                                <th>{employee.phone}</th>
-                                <th>{employee.cell}</th>
+                                <td><img src={employee.picture.thumbnail} alt="Smiley face" /></td>
+                                <td id="first_name_column" className="data-column">{employee.name.first}</td>
+                                <td className="data-column">{employee.name.last}</td>
+                                <td className="data-column">{employee.email}</td>
+                                <td className="data-column">{employee.phone}</td>
+                                <td className="data-column">{employee.cell}</td>
 
                             </tr>
 
