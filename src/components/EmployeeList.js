@@ -15,8 +15,14 @@ export default class EmployeeList extends React.Component {
 
         this.setState({
             employees: this.state.employees.sort(function (a, b) {
-                var nameA = a[key].toUpperCase(); // ignore upper and lowercase
-                var nameB = b[key].toUpperCase(); // ignore upper and lowercase
+                var nameA = a[key]; // ignore upper and lowercase
+                var nameB = b[key];
+                if (key === 'first') {
+                    nameA = a.name.first; // ignore upper and lowercase
+                    nameB = b.name.first; // ignore upper and lowercase
+                }
+
+
                 if (nameA < nameB) {
 
                     return -1;
@@ -41,8 +47,8 @@ export default class EmployeeList extends React.Component {
                 // console.log(res.data.results);
                 this.setState({
                     employees: res.data.results.sort(function (a, b) {
-                        var nameA = a.email.toUpperCase(); // ignore upper and lowercase
-                        var nameB = b.email.toUpperCase(); // ignore upper and lowercase
+                        var nameA = a.name.first.toUpperCase(); // ignore upper and lowercase
+                        var nameB = b.name.first.toUpperCase(); // ignore upper and lowercase
                         if (nameA < nameB) {
                             return -1;
                         }
@@ -116,7 +122,7 @@ export default class EmployeeList extends React.Component {
                             <th className="th-sm">
                             </th>
                             <th className="th-sm">
-                                Name
+                                <button className="btn btn-link" onClick={() => this.sortBy('first')}>Name</button>
                             </th>
                             <th className="th-sm">
                                 <button className="btn btn-link" onClick={() => this.sortBy('email')}>Email</button>
