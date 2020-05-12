@@ -11,12 +11,51 @@ export default class EmployeeList extends React.Component {
     }
 
 
+    sortBy(key) {
+
+        this.setState({
+            employees: this.state.employees.sort(function (a, b) {
+                var nameA = a[key].toUpperCase(); // ignore upper and lowercase
+                var nameB = b[key].toUpperCase(); // ignore upper and lowercase
+                if (nameA < nameB) {
+
+                    return -1;
+
+                }
+                if (nameA > nameB) {
+
+                    return 1;
+                }
+                // names must be equal
+
+                return 0;
+            })
+
+        })
+
+    }
     componentDidMount() {
 
         axios.get("https://randomuser.me/api/?results=200&nat=us")
             .then(res => {
-                console.log(res.data.results);
-                this.setState({ employees: res.data.results });
+                // console.log(res.data.results);
+                this.setState({
+                    employees: res.data.results.sort(function (a, b) {
+                        var nameA = a.email.toUpperCase(); // ignore upper and lowercase
+                        var nameB = b.email.toUpperCase(); // ignore upper and lowercase
+                        if (nameA < nameB) {
+                            return -1;
+                        }
+                        if (nameA > nameB) {
+                            return 1;
+                        }
+                        // names must be equal
+                        return 0;
+                    })
+
+
+
+                });
             });
 
     }
@@ -42,18 +81,7 @@ export default class EmployeeList extends React.Component {
         //     // names must be equal
         //     return 0;
         // }))
-        let filteredEmployees = this.state.employees.sort(function (a, b) {
-            var nameA = a.name.first.toUpperCase(); // ignore upper and lowercase
-            var nameB = b.name.first.toUpperCase(); // ignore upper and lowercase
-            if (nameA < nameB) {
-                return -1;
-            }
-            if (nameA > nameB) {
-                return 1;
-            }
-            // names must be equal
-            return 0;
-        }).filter(
+        let filteredEmployees = this.state.employees.filter(
 
             (employee) => {
 
@@ -87,13 +115,17 @@ export default class EmployeeList extends React.Component {
                         <tr id="state">
                             <th className="th-sm">
                             </th>
-                            <th className="th-sm">Name
+                            <th className="th-sm">
+                                Name
                             </th>
-                            <th className="th-sm">Email
+                            <th className="th-sm">
+                                <button className="btn btn-link" onClick={() => this.sortBy('email')}>Email</button>
                             </th>
-                            <th className="th-sm">Phone
+                            <th className="th-sm">
+                                <button className="btn btn-link" onClick={() => this.sortBy('phone')}>Phone</button>
                             </th>
-                            <th className="th-sm">Cell Phone
+                            <th className="th-sm">
+                                <button className="btn btn-link" onClick={() => this.sortBy('cell')}>Cell Phone</button>
                             </th>
                         </tr>
                     </thead>
