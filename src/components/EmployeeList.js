@@ -183,48 +183,49 @@ export default class EmployeeList extends React.Component {
                         placeholder="Search Employee Directory"
                     />
                 </nav>
-                <table className="table-responsive">
-                    <thead className="thead-dark">
-                        <tr key='300'>
-                            <th className="th-sm">
-                            </th>
-                            <th className="th-sm">
-                                <button className="btn btn-link" onClick={() => this.sortBy('name', 'first')}>First Name</button>
-                            </th>
-                            <th className="th-sm">
-                                <button className="btn btn-link" onClick={() => this.sortBy('name', 'last')}>Last Name</button>
-                            </th>
-                            <th className="th-sm">
-                                <button className="btn btn-link" onClick={() => this.sortBy('email')}>Email</button>
-                            </th>
-                            <th className="th-sm">
-                                <button className="btn btn-link" onClick={() => this.sortBy('phone')}>Phone</button>
-                            </th>
-                            <th className="th-sm">
-                                <button className="btn btn-link" onClick={() => this.sortBy('cell')}>Cell Phone</button>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody id="data">
-
-                        {filteredEmployees.map(employee =>
-                            <tr key={employee.email + employee.phone} >
-                                <td><img src={employee.picture.thumbnail} alt="Smiley face" /></td>
-                                <td id="first_name_column" className="data-column">{employee.name.first}</td>
-                                <td className="data-column">{employee.name.last}</td>
-                                <td className="data-column">{employee.email}</td>
-                                <td className="data-column">{employee.phone}</td>
-                                <td className="data-column">{employee.cell}</td>
-
+                <div className="table-responsive">
+                    <table className="table">
+                        <thead className="thead-light">
+                            <tr key='300'>
+                                <th className="">
+                                </th>
+                                <th className="">
+                                    <button className="btn btn-link" onClick={() => this.sortBy('name', 'first')}>First Name</button>
+                                </th>
+                                <th className="th-sm">
+                                    <button className="btn btn-link" onClick={() => this.sortBy('name', 'last')}>Last Name</button>
+                                </th>
+                                <th className="th-sm">
+                                    <button className="btn btn-link" onClick={() => this.sortBy('email')}>Email</button>
+                                </th>
+                                <th className="th-sm">
+                                    <button className="btn btn-link" onClick={() => this.sortBy('phone')}>Phone</button>
+                                </th>
+                                <th className="th-sm">
+                                    <button className="btn btn-link" onClick={() => this.sortBy('cell')}>Cell Phone</button>
+                                </th>
                             </tr>
+                        </thead>
+                        <tbody id="data">
+
+                            {filteredEmployees.map(employee =>
+                                <tr key={employee.email + employee.phone} >
+                                    <td><img src={employee.picture.thumbnail} alt="Smiley face" /></td>
+                                    <td id="first_name_column" className="data-column">{employee.name.first}</td>
+                                    <td className="data-column">{employee.name.last}</td>
+                                    <td className="data-column">{employee.email}</td>
+                                    <td className="data-column">{employee.phone}</td>
+                                    <td className="data-column">{employee.cell}</td>
+
+                                </tr>
 
 
 
-                        )}
-                    </tbody>
-                </table>
+                            )}
+                        </tbody>
+                    </table>
 
-
+                </div>
 
             </div >
         )

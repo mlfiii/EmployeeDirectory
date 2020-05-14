@@ -1,20 +1,6 @@
 tr {
   border: 1px solid black;
 }
-
-th{
-  padding: 5px;
-}
-
-.data-column{
-  padding-left: 25px;
-  padding-right:20px;
-}
-
-table{
-
-  margin: 20px;  
-}
 .search-imput{
 
   width: 400px;
