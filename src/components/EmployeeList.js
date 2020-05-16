@@ -8,7 +8,8 @@ export default class EmployeeList extends React.Component {
     state = {
         employees: [],
         search: "",
-        sortField: [],
+        previousField: "",
+        previousProp: "",
         sortOrder: "asc"
 
     }
@@ -16,28 +17,15 @@ export default class EmployeeList extends React.Component {
 
     sortBy(key, prop) {
 
-        // console.log('sortField:', this.state.sortField, 'key:', [key])
+
         let sortOrder = this.state.sortOrder
-        // let sortField = this.state.sortField
 
-        // this.setState({ sortField: sortField })
-        // // console.log(this.state.sortField)
-        // // console.log('sortfield:', this.state.sortField, 'sortOrder', sortOrder)
-        // console.log('sortfield_before:', sortField, 'sortOrder_before', sortOrder)
-        // if (this.state.sortField === "") {
-        //     sortOrder = 'asc'
-        //     console.log('gothere')
-        // }
+        // console.log('prevprop:', this.state.previousProp, 'prop:', prop)
+        if ((this.state.previousField !== key)) {
 
-        // if (this.state.sortField !== [key]) {
-        //     sortOrder = 'asc'
-        //     console.log('gothere2')
-        // }
-        // else if (this.state.sortField === [key]) { sortOrder = this.state.sortOrder }
+            sortOrder = 'asc'
 
-        // console.log("sort:", this.state.[key])
-
-        // console.log('sortfield_after:', sortField, 'sortOrder_after', sortOrder)
+        }
 
 
         this.setState({
@@ -87,26 +75,23 @@ export default class EmployeeList extends React.Component {
 
 
 
+        this.setState({ previousProp: prop })
+        this.setState({ previousField: key })
+
         if (this.state.sortOrder === 'asc') {
 
             this.setState({ sortOrder: 'desc' })
-            // this.setState({ sortField: [key] })
-            // console.log('gothere4')
+
 
         } else {
             this.setState({ sortOrder: 'asc' })
-            // this.setState({ sortField: [key] })
-            // console.log('gothere5')
+
 
         }
-        // if (sortOrder === 'asc') {
 
-        //     this.setState({ sortOrder: 'desc' })
-        // } else {
-        //     this.setState({ sortOrder: 'asc' })
 
-        // }
     }
+
     componentDidMount() {
 
         axios.get("https://randomuser.me/api/?results=200&nat=us")
@@ -196,13 +181,13 @@ export default class EmployeeList extends React.Component {
                                     <button className="btn btn-link" onClick={() => this.sortBy('name', 'last')}>Last Name</button>
                                 </th>
                                 <th className="th-sm">
-                                    <button className="btn btn-link" onClick={() => this.sortBy('email')}>Email</button>
+                                    <button className="btn btn-link" onClick={() => this.sortBy('email', '')}>Email</button>
                                 </th>
                                 <th className="th-sm">
-                                    <button className="btn btn-link" onClick={() => this.sortBy('phone')}>Phone</button>
+                                    <button className="btn btn-link" onClick={() => this.sortBy('phone', '')}>Phone</button>
                                 </th>
                                 <th className="th-sm">
-                                    <button className="btn btn-link" onClick={() => this.sortBy('cell')}>Cell Phone</button>
+                                    <button className="btn btn-link" onClick={() => this.sortBy('cell', '')}>Cell Phone</button>
                                 </th>
                             </tr>
                         </thead>
